@@ -1,5 +1,8 @@
 public class DecimalToBinary{
     // Decimal⇒Binary
+    /**
+    * decimal >=0
+    */
     public static String convert10To2(int decimal) {
         List<Integer> binaryList = new ArrayList<Integer>();
 
