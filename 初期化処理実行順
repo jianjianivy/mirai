@@ -1,0 +1,48 @@
+初期化処理の順序
+
+初期化処理は次の順序で実行されます。
+
+フィールド変数にデフォルト値代入
+static初期化ブロックを上から順に実行
+初期化ブロックを上から順に実行
+コンストラクタの呼び出し
+class SuperClass {
+    public static final String STATIC_INIT = "static初期化ブロック";
+    public static final String OBJECT_INIT = "初期化ブロック";
+    static {
+        System.out.println("スーパークラスの" + STATIC_INIT + "の実行");
+    }
+    {
+        System.out.println("スーパークラスの" + OBJECT_INIT + "の実行");
+    }
+    public SuperClass() {
+        System.out.println("スーパークラスのコンストラクタ実行");
+    }
+}
+
+public class InitializerSample extends SuperClass {
+    static {
+        System.out.println("サブクラスの" + STATIC_INIT + "の実行");
+    }
+    {
+        date = new Date();
+        System.out.println("サブクラスの" + OBJECT_INIT + "の実行");
+    }
+    public InitializerSample() {
+        System.out.println("サブクラスのコンストラクタの実行");
+    }
+    public static void main(String[] args) {
+        InitializerSample init = new InitializerSample();
+        System.out.println("mainメソッドの実行");
+    }
+}
+実行結果は以下の通りです。
+
+$ java InitializerSample
+スーパークラスのstatic初期化ブロックの実行
+サブクラスのstatic初期化ブロックの実行
+スーパークラスの初期化ブロックの実行
+スーパークラスのコンストラクタ実行
+サブクラスの初期化ブロックの実行
+サブクラスのコンストラクタの実行
+mainメソッドの実行
